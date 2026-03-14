@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+
+            int minLen = Integer.MAX_VALUE;
+            int count = 0;
+            boolean found = false;
+
+            for (int i = 0; i < n; i++) {
+                int subOr = 0;
+
+                for (int j = i; j < n; j++) {
+                    subOr |= arr[j];
+
+                    int outsideOr = 0;
+
+                    for (int k = 0; k < i; k++) {
+                        outsideOr |= arr[k];
+                    }
+
+                    for (int k = j + 1; k < n; k++) {
+                        outsideOr |= arr[k];
+                    }
+
+                    if (subOr == outsideOr) {
+                        int len = j - i + 1;
+
+                        if (len < minLen) {
+                            minLen = len;
+                            count = 1;
+                            found = true;
+                        } else if (len == minLen) {
+                            count++;
+                        }
+                    }
+                }
+            }
+
+            if (!found) {
+                System.out.println(-1);
+            } else {
+                System.out.println(minLen + " " + count);
+            }
+        }
+
+        sc.close();
+    }
+}
