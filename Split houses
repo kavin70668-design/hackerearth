@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class VillageDivision {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        String village = sc.next();
+
+        char[] arr = village.toCharArray();
+
+        int houseCount = 0;
+
+        for (char c : arr) {
+            if (c == 'H') {
+                houseCount++;
+            }
+        }
+
+        if (houseCount == 0) {
+            System.out.println("NO");
+            return;
+        }
+
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == '.') {
+                arr[i] = 'B';
+            }
+        }
+
+        System.out.println("YES");
+        System.out.println(new String(arr));
+    }
+}
